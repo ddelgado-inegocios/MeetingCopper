@@ -4,32 +4,22 @@
         <tabs>
 			<tab idMso="TabAddIns" label="Meeting Copper" insertAfterMso="TabHome">
 				<group id="ContentGroupMeeting" >
-					<menu id="menuNuevaReunion" getImage='MeetingIcon00' showImage="true" size="large" label="Nueva Reunión" >
-						<button id="textButtonMeeting1" label="Nueva Reunión Tema 1"
-							 screentip="Uso General" onAction="OnClickTema1"
-							 supertip="Opciones para Generar una Nueva Reunión"
-						 getImage="MeetingIcon01" />
-						<button id="textButtonMeeting2" label="Nueva Reunión Tema 1"
-							 screentip="Uso General" onAction="OnClickTema2"
-							 supertip="Opciones para Generar una Nueva Reunión"
-						 getImage="MeetingIcon02" />
-						<button id="textButtonMeeting3" label="Nueva Reunión Tema 1"
-							 screentip="Uso General" onAction="OnClickTema3"
-							 supertip="Opciones para Generar una Nueva Reunión"
-						 getImage="MeetingIcon03" />
-					</menu>
+						<button id="textButtonMeeting" label="Nueva Reunión"
+							 screentip="Uso General" onAction="NuevaCita"
+							 supertip="Generar una Nueva Reunión"
+						 getImage="MeetingIcon00" size="large"/>
 				</group>
 				<group id="ContentGroupRutina"  >
 					<button id="textButtonRutina" label="Nueva Rutina"
-						 screentip="Uso General" onAction="OnClick"
-						 supertip="Opciones para Generar una Nueva Rutina"
+						 screentip="Uso General" onAction="NuevaRutina"
+						 supertip="Generar una Nueva Rutina"
 					 getImage="RutinaIcon" size="large"/>
 					
 				</group>
 				<group id="ContentGroupMinuta"  >
 					<button id="textButtonMinuta" label="Nueva Minuta"
-						 screentip="Uso General" onAction="OnClick"
-						 supertip="Opciones para Generar una Nueva Minuta"
+						 screentip="Uso General" onAction="NuevaMinuta"
+						 supertip="Generar una Nueva Minuta"
 					 getImage="MinutaIcon" size="large"/>
 				</group>
 			</tab>
