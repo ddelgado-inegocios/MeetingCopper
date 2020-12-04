@@ -63,6 +63,26 @@ namespace MeetingCopper.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap acuerdo00 {
+            get {
+                object obj = ResourceManager.GetObject("acuerdo00", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap meeting00 {
+            get {
+                object obj = ResourceManager.GetObject("meeting00", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap meeting01 {
             get {
                 object obj = ResourceManager.GetObject("meeting01", resourceCulture);

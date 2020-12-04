@@ -7,7 +7,7 @@
 						<button id="textButtonMeeting" label="Nueva Reunión"
 							 screentip="Uso General" onAction="NuevaCita"
 							 supertip="Generar una Nueva Reunión"
-						 getImage="MeetingIcon00" size="large"/>
+						 getImage="MeetingIcon" size="large"/>
 				</group>
 				<group id="ContentGroupRutina"  >
 					<button id="textButtonRutina" label="Nueva Rutina"
