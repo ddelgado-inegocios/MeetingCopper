@@ -66,7 +66,8 @@ namespace MeetingCopper
                     rtb.Rtf = System.Text.Encoding.UTF8.GetString(newCita.RTFBody);
                     rtb.Select(rtb.TextLength, 0);
 
-                    rtb.LoadFile("C:\\Users\\Administrator\\Downloads\\MC_NuevaReunion.rtf");
+                    //rtb.LoadFile("C:\\MC_Templates\\MC_NuevaReunion.rtf");
+                    rtb.LoadFile(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Microsoft\\Plantillas\\MC_NuevaReunion.rtf");
 
                     newCita.RTFBody = System.Text.Encoding.UTF8.GetBytes(rtb.Rtf);
 
@@ -102,7 +103,9 @@ namespace MeetingCopper
                     rtb.Rtf = System.Text.Encoding.UTF8.GetString(newCita.RTFBody);
                     rtb.Select(rtb.TextLength, 0);
 
-                    rtb.LoadFile("C:\\Users\\Administrator\\Downloads\\MC_NuevaRutina.rtf");
+                    //rtb.LoadFile("C:\\MC_Templates\\MC_NuevaRutina.rtf");
+
+                    rtb.LoadFile(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Microsoft\\Plantillas\\MC_NuevaRutina.rtf");
 
                     newCita.RTFBody = System.Text.Encoding.UTF8.GetBytes(rtb.Rtf);
 
@@ -133,10 +136,12 @@ namespace MeetingCopper
                 app.CreateItem(Microsoft.Office.Interop.Outlook.OlItemType.olMailItem);
                 if (newMail != null)
                 {
-                    string HTMLTemplate = File.ReadAllText("C:\\Users\\Administrator\\Downloads\\MC_NuevaMinuta.html");
+                    //string HTMLTemplate = File.ReadAllText("C:\\MC_Templates\\MC_NuevaMinuta.html");
+                    string HTMLTemplate = File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Microsoft\\Plantillas\\MC_NuevaMinuta.html");  
 
                     newMail.Subject = "Template Minutas de Acciones";
-                    newMail.HTMLBody = HTMLTemplate;
+                    newMail.HTMLBody = HTMLTemplate + ReadSignature();
+                    
                     newMail.To = "Seleccione sus Destinatarios";
                     Microsoft.Office.Interop.Outlook.Recipients sentTo = newMail.Recipients;
                     sentTo.ResolveAll();
@@ -147,6 +152,31 @@ namespace MeetingCopper
             {
                 MessageBox.Show("Oops, ha ocurrido el siguiente error:  " + ex.Message);
             }
+        }
+
+        private string ReadSignature()
+        {
+            string appDataDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Microsoft\\Firmas";
+            string signature = string.Empty;
+            DirectoryInfo diInfo = new DirectoryInfo(appDataDir);
+
+            if (diInfo.Exists)
+            {
+                FileInfo[] fiSignature = diInfo.GetFiles("*.htm");
+
+                if (fiSignature.Length > 0)
+                {
+                    StreamReader sr = new StreamReader(fiSignature[0].FullName, Encoding.Default);
+                    signature = sr.ReadToEnd();
+
+                    if (!string.IsNullOrEmpty(signature))
+                    {
+                        string fileName = fiSignature[0].Name.Replace(fiSignature[0].Extension, string.Empty);
+                        signature = signature.Replace(fileName + "_files/", appDataDir + "/" + fileName + "_files/");
+                    }
+                }
+            }
+            return signature;
         }
 
         #region Miembros de IRibbonExtensibility

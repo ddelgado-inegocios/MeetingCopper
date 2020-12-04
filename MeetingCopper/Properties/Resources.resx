@@ -124,20 +124,8 @@
   <data name="meeting00" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\meeting00.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="meeting01" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\188-coffee-cup.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="meeting02" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\062-canvas.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="meeting03" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\051-opened.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="meeting2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\173-user-1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="minuta00" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\036-tools-and-utensils-2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="rutina00" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\076-phonebook-1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

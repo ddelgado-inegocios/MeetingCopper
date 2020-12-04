@@ -196,6 +196,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config" />
+    <None Include="app.manifest" />
     <None Include="MeetingCopper_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -224,31 +225,10 @@
     <EmbeddedResource Include="Ribbon.xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\meeting.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\173-user-1.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\036-tools-and-utensils-2.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\076-phonebook-1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\188-coffee-cup.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\062-canvas.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\051-opened.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Meetting00.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Image1.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\meeting00.png" />
@@ -268,6 +248,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>8A2CD74AB281C29A0DB11992AB5FCCF13605A6AF</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <!-- Include the build rules for a C# project. -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
