@@ -69,6 +69,7 @@ namespace MeetingCopper
                     //rtb.LoadFile("C:\\MC_Templates\\MC_NuevaReunion.rtf");
                     rtb.LoadFile(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Microsoft\\Plantillas\\MC_NuevaReunion.rtf");
 
+                    
                     newCita.RTFBody = System.Text.Encoding.UTF8.GetBytes(rtb.Rtf);
 
                     newCita.MeetingStatus = Microsoft.Office.Interop.Outlook.OlMeetingStatus.olMeeting;
