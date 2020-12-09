@@ -6,6 +6,7 @@ using System.Xml.Linq;
 using Outlook = Microsoft.Office.Interop.Outlook;
 using Office = Microsoft.Office.Core;
 using System.Windows.Forms;
+using MeetingCopper;
 
 
 namespace MeetingCopper
@@ -18,8 +19,8 @@ namespace MeetingCopper
           }
 
         Outlook.Inspectors inspectors;
-       
 
+        
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
             inspectors = this.Application.Inspectors;
@@ -33,19 +34,16 @@ namespace MeetingCopper
             Type type = typeof(MeetingCopper.Ribbon);
             Ribbon ribbon = Globals.Ribbons.GetRibbon(type) as Ribbon;
             
+            // Globals.Ribbons.MeetingCooper.Ribbon.estado_meeting = true;
             if (mailItem != null)
             {
-                //ribbon.habilitaMail();
-                ribbon.estado_meeting = false;
-                ribbon.estado_mail = true;
+                //mailItem.Body = "cuerpo";
+                //MessageBox.Show(mailItem.HTMLBody);
             }
 
             if (meetingItem != null)
             {
-                //MessageBox.Show("Meeting");
-                //ribbon.habilitaMeeting();
-                ribbon.estado_meeting = true;
-                ribbon.estado_mail = false;
+
             }
         }
 

@@ -33,7 +33,7 @@
     <PublishUrl>C:\MeetingCooper01v\</PublishUrl>
     <InstallUrl />
     <TargetCulture>es</TargetCulture>
-    <ApplicationVersion>1.0.0.4</ApplicationVersion>
+    <ApplicationVersion>1.0.0.7</ApplicationVersion>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateInterval>7</UpdateInterval>
@@ -233,6 +233,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\acuerdo00.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="RibbonMeeting.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="RibbonMail.xml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

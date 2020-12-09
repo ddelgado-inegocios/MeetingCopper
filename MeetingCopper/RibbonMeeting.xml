@@ -5,25 +5,17 @@
 			<tab idMso="TabAddIns" label="Meeting Copper" insertAfterMso="TabHome"  >
 				<group id="ContentGroupMeeting" >
 					<button id="textButtonMeeting" label="Nueva Reunión"
-					 screentip="Uso General" onAction="NuevaCita"
+					 screentip="Uso General" onAction="NuevaCitaBody"
 					 supertip="Generar una Nueva Reunión"
 					 getImage="MeetingIcon" size="large"
-					  />
+					 />
 				</group>
 				<group id="ContentGroupRutina"  >
 					<button id="textButtonRutina" label="Nueva Rutina"
-					 screentip="Uso General" onAction="NuevaRutina"
+					 screentip="Uso General" onAction="NuevaRutinaBody"
 					 supertip="Generar una Nueva Rutina"
 					 getImage="RutinaIcon" size="large"
-					  />
-					
-				</group>
-				<group id="ContentGroupMinuta"  >
-					<button id="textButtonMinuta" label="Nueva Minuta"
-					 screentip="Uso General" onAction="NuevaMinuta"
-					 supertip="Generar una Nueva Minuta"
-					 getImage="MinutaIcon" size="large"
-					  />
+					 />
 				</group>
 			</tab>
         </tabs>
