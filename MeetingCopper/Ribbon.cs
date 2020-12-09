@@ -38,8 +38,9 @@ namespace MeetingCopper
     {
         private Office.IRibbonUI ribbon;
 
-         public Boolean estado_meeting = true;
-         public Boolean estado_mail = true;
+        public Boolean estado_meeting { get; set; } = true;
+       
+         public Boolean estado_mail { get; set; } = true;
         public Ribbon()
         {
 
@@ -87,8 +88,14 @@ namespace MeetingCopper
                     RichTextBox rtb = new RichTextBox();
                     rtb.Rtf = System.Text.Encoding.UTF8.GetString(newCita.RTFBody);
                     rtb.Select(rtb.TextLength, 0);
-
-                    rtb.LoadFile(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Microsoft\\Plantillas\\MC_NuevaReunion.rtf");
+                    try
+                    {
+                        rtb.LoadFile(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Microsoft\\Plantillas\\MC_NuevaReunion.rtf");
+                    }
+                    catch (Exception e)
+                    {
+                        rtb.LoadFile(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Microsoft\\Templates\\MC_NuevaReunion.rtf");
+                    }
                                         
                     newCita.RTFBody = System.Text.Encoding.UTF8.GetBytes(rtb.Rtf);
 
@@ -129,9 +136,14 @@ namespace MeetingCopper
                     RichTextBox rtb = new RichTextBox();
                     rtb.Rtf = System.Text.Encoding.UTF8.GetString(newCita.RTFBody);
                     rtb.Select(rtb.TextLength, 0);
-
-                    rtb.LoadFile(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Microsoft\\Plantillas\\MC_NuevaRutina.rtf");
-
+                    try
+                    {
+                        rtb.LoadFile(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Microsoft\\Plantillas\\MC_NuevaRutina.rtf");
+                    }
+                    catch
+                    {
+                        rtb.LoadFile(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Microsoft\\Templates\\MC_NuevaRutina.rtf");
+                    }
                     newCita.RTFBody = System.Text.Encoding.UTF8.GetBytes(rtb.Rtf);
 
                     newCita.Start = DateTime.Now.AddHours(2);
@@ -164,7 +176,15 @@ namespace MeetingCopper
                 {
                     estado_mail = true;
                     estado_meeting = false;
-                    string HTMLTemplate = File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Microsoft\\Plantillas\\MC_NuevaMinuta.html");  
+                    string HTMLTemplate;
+                    try
+                    {
+                        HTMLTemplate = File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Microsoft\\Plantillas\\MC_NuevaMinuta.html");
+                    }
+                    catch
+                    {
+                        HTMLTemplate = File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Microsoft\\Templates\\MC_NuevaMinuta.html");
+                    }
 
                     newMail.Subject = "Template Minutas de Acciones";
                     newMail.HTMLBody = HTMLTemplate + ReadSignature();
@@ -183,7 +203,16 @@ namespace MeetingCopper
 
         private string ReadSignature()
         {
-            string appDataDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Microsoft\\Firmas";
+            string appDataDir;
+            try
+            {
+                appDataDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Microsoft\\Firmas";
+            }
+            catch
+            {
+                appDataDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Microsoft\\Signatures";
+            }
+
             string signature = string.Empty;
             DirectoryInfo diInfo = new DirectoryInfo(appDataDir);
 

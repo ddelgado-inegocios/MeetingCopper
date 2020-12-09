@@ -18,9 +18,7 @@ namespace MeetingCopper
           }
 
         Outlook.Inspectors inspectors;
-      
-        
-
+       
 
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
