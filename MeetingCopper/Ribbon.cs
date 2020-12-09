@@ -38,38 +38,58 @@ namespace MeetingCopper
     {
         private Office.IRibbonUI ribbon;
 
-
+         public Boolean estado_meeting = true;
+         public Boolean estado_mail = true;
         public Ribbon()
         {
 
         }
-        public Bitmap MinutaIcon(Microsoft.Office.Core.IRibbonControl control) => Resources.acuerdo00;
-        public Bitmap RutinaIcon(Microsoft.Office.Core.IRibbonControl control) => Resources.rutina00;
-        public Bitmap MeetingIcon(Microsoft.Office.Core.IRibbonControl control) => Resources.meeting2;
+        public Bitmap MinutaIcon(Office.IRibbonControl control) => Resources.acuerdo00;
+        public Bitmap RutinaIcon(Office.IRibbonControl control) => Resources.rutina00;
+        public Bitmap MeetingIcon(Office.IRibbonControl control) => Resources.meeting2;
 
-
-        public void OnClick(Office.IRibbonControl control)
+        public Boolean HabilitaBotonMinuta(Office.IRibbonControl control)
         {
-            
+            return estado_mail;
+        }
+
+        public Boolean HabilitaBotonMeeting(Office.IRibbonControl control)
+        {
+            return estado_meeting;
+        }
+
+        public void habilitaMail()
+        {
+            estado_mail = true;
+            estado_meeting = false;
+        }
+
+        public void habilitaMeeting()
+        {
+            estado_mail = false;
+            estado_meeting = true;
         }
 
         public void NuevaCita(Office.IRibbonControl control)
         {
+            
             try
             {
                 Microsoft.Office.Interop.Outlook.Application app = Globals.ThisAddIn.Application;
                 Microsoft.Office.Interop.Outlook.AppointmentItem newCita = (Microsoft.Office.Interop.Outlook.AppointmentItem)
                 app.CreateItem(Microsoft.Office.Interop.Outlook.OlItemType.olAppointmentItem);
+                
+
                 if (newCita != null)
                 {
+                    estado_mail = false;
+                    estado_meeting = true;
                     RichTextBox rtb = new RichTextBox();
                     rtb.Rtf = System.Text.Encoding.UTF8.GetString(newCita.RTFBody);
                     rtb.Select(rtb.TextLength, 0);
 
-                    //rtb.LoadFile("C:\\MC_Templates\\MC_NuevaReunion.rtf");
                     rtb.LoadFile(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Microsoft\\Plantillas\\MC_NuevaReunion.rtf");
-
-                    
+                                        
                     newCita.RTFBody = System.Text.Encoding.UTF8.GetBytes(rtb.Rtf);
 
                     newCita.MeetingStatus = Microsoft.Office.Interop.Outlook.OlMeetingStatus.olMeeting;
@@ -81,11 +101,14 @@ namespace MeetingCopper
                     newCita.Recipients.Add("Seleccione los Destinatarios");
                     newCita.Display(true);
                     newCita.AllDayEvent = false;
-                }                
+
+                    
+                } 
+                
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Oops, ha ocurrido el siguiente error:  " + ex.Message);
+              //  MessageBox.Show("Oops, ha ocurrido el siguiente error:  " + ex.Message);
             }
         }
 
@@ -98,13 +121,14 @@ namespace MeetingCopper
                 app.CreateItem(Microsoft.Office.Interop.Outlook.OlItemType.olAppointmentItem);
                 if (newCita != null)
                 {
+                    estado_mail = false;
+                    estado_meeting = true;
+
                     newCita.MeetingStatus = Microsoft.Office.Interop.Outlook.OlMeetingStatus.olMeeting;
 
                     RichTextBox rtb = new RichTextBox();
                     rtb.Rtf = System.Text.Encoding.UTF8.GetString(newCita.RTFBody);
                     rtb.Select(rtb.TextLength, 0);
-
-                    //rtb.LoadFile("C:\\MC_Templates\\MC_NuevaRutina.rtf");
 
                     rtb.LoadFile(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Microsoft\\Plantillas\\MC_NuevaRutina.rtf");
 
@@ -124,12 +148,13 @@ namespace MeetingCopper
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Oops, ha ocurrido el siguiente error:  " + ex.Message);
+              //  MessageBox.Show("Oops, ha ocurrido el siguiente error:  " + ex.Message);
             }
         }
-
+        
         public void NuevaMinuta(Office.IRibbonControl control)
         {
+            
             try
             {
                 Microsoft.Office.Interop.Outlook.Application app = Globals.ThisAddIn.Application;
@@ -137,7 +162,8 @@ namespace MeetingCopper
                 app.CreateItem(Microsoft.Office.Interop.Outlook.OlItemType.olMailItem);
                 if (newMail != null)
                 {
-                    //string HTMLTemplate = File.ReadAllText("C:\\MC_Templates\\MC_NuevaMinuta.html");
+                    estado_mail = true;
+                    estado_meeting = false;
                     string HTMLTemplate = File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Microsoft\\Plantillas\\MC_NuevaMinuta.html");  
 
                     newMail.Subject = "Template Minutas de Acciones";
@@ -151,7 +177,7 @@ namespace MeetingCopper
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Oops, ha ocurrido el siguiente error:  " + ex.Message);
+               // MessageBox.Show("Oops, ha ocurrido el siguiente error:  " + ex.Message);
             }
         }
 
