@@ -134,9 +134,10 @@ namespace MeetingCopper
                         Word.Document wordDocument = inspector.WordEditor as Word.Document; 
                         Word.Range range = wordDocument.Range(wordDocument.Content.Start, wordDocument.Content.End);
                         Word.Find findObject = range.Find;
-                        //MessageBox.Show(range.XML);
+//                        MessageBox.Show(range.Find.);
                         findObject.ClearFormatting();
                         findObject.Text = cuerpo;
+                        
                         findObject.Replacement.ClearFormatting();
                         findObject.Replacement.Text = "new value";
                         object replaceAll = Word.WdReplace.wdReplaceAll;
