@@ -24,8 +24,7 @@ namespace MeetingCopper
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
             inspectors = this.Application.Inspectors;
-            inspectors.NewInspector +=
-            new Microsoft.Office.Interop.Outlook.InspectorsEvents_NewInspectorEventHandler(Inspectors_NewInspector);
+            inspectors.NewInspector += new Outlook.InspectorsEvents_NewInspectorEventHandler(Inspectors_NewInspector);
         }
         void Inspectors_NewInspector(Microsoft.Office.Interop.Outlook.Inspector Inspector)
         {
@@ -34,7 +33,6 @@ namespace MeetingCopper
             Type type = typeof(MeetingCopper.Ribbon);
             Ribbon ribbon = Globals.Ribbons.GetRibbon(type) as Ribbon;
             
-            // Globals.Ribbons.MeetingCooper.Ribbon.estado_meeting = true;
             if (mailItem != null)
             {
                 //mailItem.Body = "cuerpo";
