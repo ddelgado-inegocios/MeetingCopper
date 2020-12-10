@@ -102,44 +102,13 @@ namespace MeetingCopper
             
             if (mailItem != null)
             {
-                string HTMLTemplate;
-                try
-                {
-                    HTMLTemplate = File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Microsoft\\Plantillas\\MC_NuevaMinuta.html");
-                }
-                catch
-                {
-                    HTMLTemplate = File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Microsoft\\Templates\\MC_NuevaMinuta.html");
-                }
-
-                //MessageBox.Show(mailItem.HTMLBody);
-
-                //mailItem.HTMLBody = mailItem.HTMLBody.Replace(mailItem.HTMLBody, HTMLTemplate);
-
-                mailItem.HTMLBody = mailItem.HTMLBody.Replace("danilo", HTMLTemplate);
-
-                string apunte = mailItem.HTMLBody;
-
-                //MessageBox.Show(apunte);
-                //mailItem.Display(true);
+                
 
             }
 
             if (meetingItem != null)
             {
-                RichTextBox rtb = new RichTextBox();
-                rtb.Rtf = System.Text.Encoding.UTF8.GetString(meetingItem.RTFBody);
-                rtb.Select(rtb.TextLength, 0);
-                try
-                {
-                    rtb.LoadFile(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Microsoft\\Plantillas\\MC_NuevaReunion.rtf");
-                }
-                catch (Exception e)
-                {
-                    rtb.LoadFile(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Microsoft\\Templates\\MC_NuevaReunion.rtf");
-                }
-
-                meetingItem.RTFBody = System.Text.Encoding.UTF8.GetBytes(rtb.Rtf);
+                
             }
         }
         public void ReadMail(Office.IRibbonControl control)
@@ -157,13 +126,12 @@ namespace MeetingCopper
                     //Inspectors_NewInspector(currentInspector);
 
                     Outlook.Inspector inspector = currentInspector;
-                    
-                        //newMail.Display();
+
+                    if (inspector.IsWordMail())
+                    {
+                        newMail.Display();
                         string cuerpo = newMail.HTMLBody;
-                        
-
-                        Word.Document wordDocument = inspector.WordEditor as Word.Document;
-
+                        Word.Document wordDocument = inspector.WordEditor as Word.Document; 
                         Word.Range range = wordDocument.Range(wordDocument.Content.Start, wordDocument.Content.End);
                         Word.Find findObject = range.Find;
                         //MessageBox.Show(range.XML);
@@ -171,11 +139,11 @@ namespace MeetingCopper
                         findObject.Text = cuerpo;
                         findObject.Replacement.ClearFormatting();
                         findObject.Replacement.Text = "new value";
-
                         object replaceAll = Word.WdReplace.wdReplaceAll;
 
                         findObject.Execute(ReplaceWith: replaceAll);
-
+                    }
+                    
                 }
             }
             catch(Exception ex)
