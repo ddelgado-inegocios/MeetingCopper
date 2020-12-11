@@ -181,9 +181,8 @@ namespace MeetingCopper
             
             try
             {
-                Microsoft.Office.Interop.Outlook.Application app = Globals.ThisAddIn.Application;
-                Microsoft.Office.Interop.Outlook.AppointmentItem newCita = (Microsoft.Office.Interop.Outlook.AppointmentItem)
-                app.CreateItem(Microsoft.Office.Interop.Outlook.OlItemType.olAppointmentItem);
+                Outlook.Application app = Globals.ThisAddIn.Application;
+                Outlook.AppointmentItem newCita = (Outlook.AppointmentItem)app.CreateItem(Outlook.OlItemType.olAppointmentItem);
                 
 
                 if (newCita != null)
@@ -209,10 +208,8 @@ namespace MeetingCopper
                     newCita.Location = "Elija la ubicación de la Reunión";
                     //newCita.Subject = "Reunión Template";
                     newCita.Recipients.Add("Seleccione los Destinatarios");
-                    newCita.Display(true);
                     newCita.AllDayEvent = false;
-
-                    
+                    newCita.Display(false);
                 } 
                 
             }
@@ -226,9 +223,8 @@ namespace MeetingCopper
         {
             try
             {
-                Microsoft.Office.Interop.Outlook.Application app = Globals.ThisAddIn.Application;
-                Microsoft.Office.Interop.Outlook.AppointmentItem newCita = (Microsoft.Office.Interop.Outlook.AppointmentItem)
-                app.CreateItem(Microsoft.Office.Interop.Outlook.OlItemType.olAppointmentItem);
+                Outlook.Application app = Globals.ThisAddIn.Application;
+                Outlook.AppointmentItem newCita = (Outlook.AppointmentItem)app.CreateItem(Outlook.OlItemType.olAppointmentItem);
                 if (newCita != null)
                 {
                     newCita.MeetingStatus = Microsoft.Office.Interop.Outlook.OlMeetingStatus.olMeeting;
@@ -249,13 +245,9 @@ namespace MeetingCopper
                     newCita.Start = DateTime.Now.AddHours(2);
                     newCita.End = DateTime.Now.AddHours(3);
                     newCita.Location = "Elija la ubicación de la Reunión";
-                    //newCita.Subject = "Reunión Template";
                     newCita.Recipients.Add("Seleccione los Destinatarios");
-
-                    newCita.Display(true);
                     newCita.AllDayEvent = false;
-
-                    
+                    newCita.Display(false);
                 }
             }
             catch (Exception ex)
@@ -269,9 +261,8 @@ namespace MeetingCopper
             
             try
             {
-                Microsoft.Office.Interop.Outlook.Application app = Globals.ThisAddIn.Application;
-                Microsoft.Office.Interop.Outlook.MailItem newMail = (Microsoft.Office.Interop.Outlook.MailItem)
-                app.CreateItem(Microsoft.Office.Interop.Outlook.OlItemType.olMailItem);
+                Outlook.Application app = Globals.ThisAddIn.Application;
+                Outlook.MailItem newMail = (Microsoft.Office.Interop.Outlook.MailItem)app.CreateItem(Outlook.OlItemType.olMailItem);
                 Outlook.ExchangeUser currentUser = app.Session.CurrentUser.AddressEntry.GetExchangeUser();
                 string email = "@angloamerican";
                 if (currentUser != null)
@@ -291,12 +282,12 @@ namespace MeetingCopper
                         HTMLTemplate = File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Microsoft\\Templates\\MC_NuevaMinuta.html");
                     }
 
-                    newMail.Subject = "Minutas de Reunión";
+                    newMail.Subject = "Minuta Reunión";
                     newMail.HTMLBody = HTMLTemplate + ReadSignature(email);
                     
                     newMail.To = "Seleccione sus Destinatarios";
                     
-                    newMail.Display(true);
+                    newMail.Display(false);
                     
                 }
             }
@@ -349,14 +340,14 @@ namespace MeetingCopper
             
             switch (ribbonID)
             {
-                /*case "Microsoft.Outlook.Appointment":
+                case "Microsoft.Outlook.Appointment":
                     return GetResourceText("MeetingCopper.RibbonMeeting.xml");
                 case "Microsoft.Outlook.Mail.Compose":
-                    return GetResourceText("MeetingCopper.RibbonMail.xml");*/
+                    return GetResourceText("MeetingCopper.RibbonMail.xml");
                 case "Microsoft.Outlook.Explorer":
                     return GetResourceText("MeetingCopper.Ribbon.xml");
                 default:
-                    return GetResourceText("");
+                    return GetResourceText("MeetingCopper.Ribbon.xml");
             }
         }
 

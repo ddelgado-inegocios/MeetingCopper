@@ -5,14 +5,14 @@
 			<tab idMso="TabAddIns" label="Meeting Tools" insertAfterMso="TabHome"  >
 				<group id="ContentGroupMeeting" >
 					<button id="textButtonMeeting" label="Nueva Reunión"
-					 screentip="Uso General" onAction="NuevaCitaBody"
+					 screentip="Uso General" onAction="NuevaCita"
 					 supertip="Generar una Nueva Reunión"
 					 getImage="MeetingIcon" size="large"
 					 />
 				</group>
 				<group id="ContentGroupRutina"  >
 					<button id="textButtonRutina" label="Task Assignment"
-					 screentip="Uso General" onAction="NuevaRutinaBody"
+					 screentip="Uso General" onAction="NuevaRutina"
 					 supertip="Generar una Nueva Rutina"
 					 getImage="RutinaIcon" size="large"
 					 />
