@@ -26,17 +26,15 @@ namespace MeetingCopper
             inspectors = this.Application.Inspectors;
             inspectors.NewInspector += new Outlook.InspectorsEvents_NewInspectorEventHandler(Inspectors_NewInspector);
         }
-        void Inspectors_NewInspector(Microsoft.Office.Interop.Outlook.Inspector Inspector)
+        void Inspectors_NewInspector(Outlook.Inspector Inspector)
         {
             Outlook.MailItem mailItem = Inspector.CurrentItem as Outlook.MailItem;
             Outlook.AppointmentItem meetingItem = Inspector.CurrentItem as Outlook.AppointmentItem;
-            Type type = typeof(MeetingCopper.Ribbon);
-            Ribbon ribbon = Globals.Ribbons.GetRibbon(type) as Ribbon;
             
             if (mailItem != null)
             {
                 //mailItem.Body = "cuerpo";
-                //MessageBox.Show(mailItem.HTMLBody);
+                //MessageBox.Show(mailItem.HTMLBody.Substring(mailItem.HTMLBody.Length - 700));
             }
 
             if (meetingItem != null)

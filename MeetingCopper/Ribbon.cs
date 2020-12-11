@@ -50,7 +50,7 @@ namespace MeetingCopper
         public Bitmap MeetingIcon(Office.IRibbonControl control) => Resources.meeting2;
 
 
-        public void NuevaCitaBody(Office.IRibbonControl control)
+       /* public void NuevaCitaBody(Office.IRibbonControl control)
         {
             try
             {
@@ -61,7 +61,7 @@ namespace MeetingCopper
                     Microsoft.Office.Interop.Outlook.AppointmentItem newCita = (Microsoft.Office.Interop.Outlook.AppointmentItem)
                     app.CreateItem(Microsoft.Office.Interop.Outlook.OlItemType.olAppointmentItem);
                     Outlook.Inspector currentInspector = (Outlook.Inspector)newCita.GetInspector;
-                    Inspectors_NewInspector(currentInspector);
+                    Inspectors_NewInspectorv(currentInspector);
                 }
 
             }
@@ -69,9 +69,9 @@ namespace MeetingCopper
             {
                 //  MessageBox.Show("Oops, ha ocurrido el siguiente error:  " + ex.Message);
             }
-        }
+        }*/
 
-        public void NuevaRutinaBody(Office.IRibbonControl control)
+        /*public void NuevaRutinaBody(Office.IRibbonControl control)
         {
             try
             {
@@ -82,7 +82,7 @@ namespace MeetingCopper
                     Microsoft.Office.Interop.Outlook.AppointmentItem newCita = (Microsoft.Office.Interop.Outlook.AppointmentItem)
                     app.CreateItem(Microsoft.Office.Interop.Outlook.OlItemType.olAppointmentItem);
                     Outlook.Inspector currentInspector = (Outlook.Inspector)newCita.GetInspector;
-                    Inspectors_NewInspector(currentInspector);
+                    Inspectors_NewInspectorv(currentInspector);
 
 
                 }
@@ -92,17 +92,17 @@ namespace MeetingCopper
 
             }
             
-        }
+        }*/
        
 
-        void Inspectors_NewInspector(Outlook.Inspector Inspector)
+       /* void Inspectors_NewInspectorv(Outlook.Inspector Inspector)
         {
             Outlook.MailItem mailItem = Inspector.CurrentItem as Outlook.MailItem;
             Outlook.AppointmentItem meetingItem = Inspector.CurrentItem as Outlook.AppointmentItem;
-            
+            MessageBox.Show("si");
             if (mailItem != null)
             {
-                
+                MessageBox.Show(mailItem.HTMLBody.Substring(mailItem.HTMLBody.Length - 700));
 
             }
 
@@ -110,8 +110,9 @@ namespace MeetingCopper
             {
                 
             }
-        }
-        public void ReadMail(Office.IRibbonControl control)
+        }*/
+
+        /*public void ReadMail(Office.IRibbonControl control)
         {
             try
             {
@@ -119,20 +120,42 @@ namespace MeetingCopper
                 DialogResult dialogResult = MessageBox.Show("Va a eliminar el contenido no enviado, ¿desea continuar?", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (dialogResult == DialogResult.Yes)
                 {
-
                     Outlook.Application app = Globals.ThisAddIn.Application;
-                    Outlook.MailItem newMail = app.CreateItem(Outlook.OlItemType.olMailItem);
+                    Outlook.MailItem newMail = (Outlook.MailItem)app.CreateItem(Outlook.OlItemType.olMailItem);
                     Outlook.Inspector currentInspector = (Outlook.Inspector)newMail.GetInspector;
-                    //Inspectors_NewInspector(currentInspector);
+                    Inspectors_NewInspectorv(currentInspector);
+                    Outlook.MailItem mailItem = Inspector.CurrentItem as Outlook.MailItem;
+                    //Outlook.Inspectors inspectors;
+                    //inspectors = this.Application.Inspectors;
 
-                    Outlook.Inspector inspector = currentInspector;
+                    //Outlook.Application app = Globals.ThisAddIn.Application;
+                    //inspectors = app.Inspectors;
+                    //Inspectors_NewInspector(inspectors);
+                    //inspectors.NewInspector += new Outlook.InspectorsEvents_NewInspectorEventHandler(Inspectors_NewInspectorv);
 
-                    if (inspector.IsWordMail())
+                    /*Outlook.MailItem newMail = app.CreateItem(Outlook.OlItemType.olMailItem);
+                    
+                    Outlook.Inspector Inspector = newMail.GetInspector;
+                    
+
+                    //Outlook.MailItem newMail = app.CreateItem(Outlook.OlItemType.olMailItem);
+
+                    
+
+                    //Outlook.Inspector inspector = currentInspector;
+                    //Outlook.Inspector inspector = app.ActiveInspector.currentInspector;
+
+                    if (Inspector.IsWordMail())
                     {
-                        newMail.Display();
+                        //MessageBox.Show("si");
+                        newMail.BodyFormat = Outlook.OlBodyFormat.olFormatHTML;
                         string cuerpo = newMail.HTMLBody;
-                        Word.Document wordDocument = inspector.WordEditor as Word.Document; 
-                        Word.Range range = wordDocument.Range(wordDocument.Content.Start, wordDocument.Content.End);
+                        Word.Document wordDocument = Inspector.WordEditor;
+                        Word.Selection selected = wordDocument.Windows[1].Selection;
+                        MessageBox.Show(cuerpo.Substring(cuerpo.Length - 700));
+                        //Word.Range range = wordDocument.Range(wordDocument.Content.Start, wordDocument.Content.End);
+                        Word.Range range = wordDocument.Range(0, wordDocument.Characters.Count);
+                        //MessageBox.Show(wordDocument.Content.End.ToString());
                         Word.Find findObject = range.Find;
 //                        MessageBox.Show(range.Find.);
                         findObject.ClearFormatting();
@@ -144,14 +167,14 @@ namespace MeetingCopper
 
                         findObject.Execute(ReplaceWith: replaceAll);
                     }
-                    
+
                 }
             }
             catch(Exception ex)
             {
 
             }
-        }
+        }*/
 
         public void NuevaCita(Office.IRibbonControl control)
         {
@@ -326,14 +349,14 @@ namespace MeetingCopper
             
             switch (ribbonID)
             {
-                case "Microsoft.Outlook.Appointment":
+                /*case "Microsoft.Outlook.Appointment":
                     return GetResourceText("MeetingCopper.RibbonMeeting.xml");
                 case "Microsoft.Outlook.Mail.Compose":
-                    return GetResourceText("MeetingCopper.RibbonMail.xml");
+                    return GetResourceText("MeetingCopper.RibbonMail.xml");*/
                 case "Microsoft.Outlook.Explorer":
                     return GetResourceText("MeetingCopper.Ribbon.xml");
                 default:
-                    return GetResourceText("MeetingCopper.Ribbon.xml");
+                    return GetResourceText("");
             }
         }
 
