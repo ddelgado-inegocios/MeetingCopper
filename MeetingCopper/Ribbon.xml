@@ -2,7 +2,7 @@
 <customUI onLoad="Ribbon_Load" xmlns="http://schemas.microsoft.com/office/2006/01/customui" >
     <ribbon>
         <tabs >
-			<tab idMso="TabAddIns" label="Meeting Copper" insertAfterMso="TabHome"  >
+			<tab idMso="TabAddIns" label="Meeting Tools" insertAfterMso="TabHome"  >
 				<group id="ContentGroupMeeting" >
 					<button id="textButtonMeeting" label="Nueva Reunión"
 					 screentip="Uso General" onAction="NuevaCita"
@@ -11,7 +11,7 @@
 					  />
 				</group>
 				<group id="ContentGroupRutina"  >
-					<button id="textButtonRutina" label="Nueva Rutina"
+					<button id="textButtonRutina" label="Task Assignment" 
 					 screentip="Uso General" onAction="NuevaRutina"
 					 supertip="Generar una Nueva Rutina"
 					 getImage="RutinaIcon" size="large"

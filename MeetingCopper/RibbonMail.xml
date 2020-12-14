@@ -2,12 +2,12 @@
 <customUI onLoad="Ribbon_Load" xmlns="http://schemas.microsoft.com/office/2006/01/customui" >
     <ribbon>
         <tabs >
-			<tab idMso="TabAddIns" label="Meeting Copper" insertAfterMso="TabHome"  >
+			<tab idMso="TabAddIns" label="Meeting Tools" insertAfterMso="TabHome"  >
 				<group id="ContentGroupMinuta"  >
 					<button id="textButtonMinuta" label="Nueva Minuta"
-					 screentip="Uso General" onAction="ReadMail"
+					 screentip="Uso General" onAction="NuevaMinuta"
 					 supertip="Generar una Nueva Minuta"
-					 getImage="MinutaIcon" size="large"
+					 getImage="MinutaIcon" size="large" 
 					  />
 				</group>
 			</tab>

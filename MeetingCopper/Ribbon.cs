@@ -7,10 +7,12 @@ using System.Runtime.InteropServices;
 using System.Text;
 using Office = Microsoft.Office.Core;
 using Outlook = Microsoft.Office.Interop.Outlook;
+using Word = Microsoft.Office.Interop.Word;
 using System.Windows.Forms;
 using System.Drawing;
 using MeetingCopper.Properties;
 using System.Xml.Linq;
+
 
 // TODO:  Siga estos pasos para habilitar el elemento (XML) de la cinta de opciones:
 
@@ -38,9 +40,7 @@ namespace MeetingCopper
     {
         private Office.IRibbonUI ribbon;
 
-        public  Boolean estado_meeting { get; set; } = true;
        
-         public  Boolean estado_mail { get; set; } = true;
         public Ribbon()
         {
 
@@ -49,64 +49,19 @@ namespace MeetingCopper
         public Bitmap RutinaIcon(Office.IRibbonControl control) => Resources.rutina00;
         public Bitmap MeetingIcon(Office.IRibbonControl control) => Resources.meeting2;
 
-        public Boolean HabilitaBotonMinuta(Office.IRibbonControl control)
-        {
-            return estado_mail;
-        }
 
-        public Boolean HabilitaBotonMeeting(Office.IRibbonControl control)
-        {
-            return estado_meeting;
-        }
-
-        public void habilitaMail()
-        {
-            estado_mail = true;
-            estado_meeting = false;
-        }
-
-        public void habilitaMeeting()
-        {
-            estado_mail = false;
-            estado_meeting = true;
-        }
-
-        public void NuevaCitaBody(Office.IRibbonControl control)
+       /* public void NuevaCitaBody(Office.IRibbonControl control)
         {
             try
             {
-                Microsoft.Office.Interop.Outlook.Application app = Globals.ThisAddIn.Application;
-                Microsoft.Office.Interop.Outlook.AppointmentItem newCita = (Microsoft.Office.Interop.Outlook.AppointmentItem)
-                app.CreateItem(Microsoft.Office.Interop.Outlook.OlItemType.olAppointmentItem);
-
-
-                if (newCita != null)
+                DialogResult dialogResult = MessageBox.Show("Va a eliminar el contenido no enviado, ¿desea continuar?", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (dialogResult == DialogResult.Yes)
                 {
-                    estado_mail = false;
-                    estado_meeting = true;
-                    RichTextBox rtb = new RichTextBox();
-                    rtb.Rtf = System.Text.Encoding.UTF8.GetString(newCita.RTFBody);
-                    rtb.Select(rtb.TextLength, 0);
-                    try
-                    {
-                        rtb.LoadFile(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Microsoft\\Plantillas\\MC_NuevaReunion.rtf");
-                    }
-                    catch (Exception e)
-                    {
-                        rtb.LoadFile(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Microsoft\\Templates\\MC_NuevaReunion.rtf");
-                    }
-
-                    newCita.RTFBody = System.Text.Encoding.UTF8.GetBytes(rtb.Rtf);
-
-                    newCita.MeetingStatus = Microsoft.Office.Interop.Outlook.OlMeetingStatus.olMeeting;
-
-                    newCita.Start = DateTime.Now.AddHours(2);
-                    newCita.End = DateTime.Now.AddHours(3);
-                    newCita.Location = "Elija la ubicación de la Reunión";
-                    newCita.Subject = "Reunión Template";
-                    newCita.Recipients.Add("Seleccione los Destinatarios");
-                    newCita.Display(true);
-                    newCita.AllDayEvent = false;
+                    Microsoft.Office.Interop.Outlook.Application app = Globals.ThisAddIn.Application;
+                    Microsoft.Office.Interop.Outlook.AppointmentItem newCita = (Microsoft.Office.Interop.Outlook.AppointmentItem)
+                    app.CreateItem(Microsoft.Office.Interop.Outlook.OlItemType.olAppointmentItem);
+                    Outlook.Inspector currentInspector = (Outlook.Inspector)newCita.GetInspector;
+                    Inspectors_NewInspectorv(currentInspector);
                 }
 
             }
@@ -114,61 +69,124 @@ namespace MeetingCopper
             {
                 //  MessageBox.Show("Oops, ha ocurrido el siguiente error:  " + ex.Message);
             }
-        }
+        }*/
 
-        public void NuevaRutinaBody(Office.IRibbonControl control)
+        /*public void NuevaRutinaBody(Office.IRibbonControl control)
         {
-
-        }
-
-        public void ReadMail(Office.IRibbonControl control)
-        {            
-            DialogResult dialogResult = MessageBox.Show("Va a eliminar el contenido no enviado, ¿desea continuar?", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (dialogResult == DialogResult.Yes)
+            try
             {
-                Microsoft.Office.Interop.Outlook.Application app = Globals.ThisAddIn.Application;
-                Microsoft.Office.Interop.Outlook.MailItem newMail = (Microsoft.Office.Interop.Outlook.MailItem)
-                app.CreateItem(Microsoft.Office.Interop.Outlook.OlItemType.olMailItem);
-                Outlook.ExchangeUser currentUser = app.Session.CurrentUser.AddressEntry.GetExchangeUser();
-                string email = "@angloamerican";
-                if (currentUser != null)
+                DialogResult dialogResult = MessageBox.Show("Va a eliminar el contenido no enviado, ¿desea continuar?", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (dialogResult == DialogResult.Yes)
                 {
-                    email = currentUser.PrimarySmtpAddress;
-                    //MessageBox.Show(email);
+                    Microsoft.Office.Interop.Outlook.Application app = Globals.ThisAddIn.Application;
+                    Microsoft.Office.Interop.Outlook.AppointmentItem newCita = (Microsoft.Office.Interop.Outlook.AppointmentItem)
+                    app.CreateItem(Microsoft.Office.Interop.Outlook.OlItemType.olAppointmentItem);
+                    Outlook.Inspector currentInspector = (Outlook.Inspector)newCita.GetInspector;
+                    Inspectors_NewInspectorv(currentInspector);
+
+
                 }
-                string HTMLTemplate;
-                try
-                {
-                    HTMLTemplate = File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Microsoft\\Plantillas\\MC_NuevaMinuta.html");
-                }
-                catch
-                {
-                    HTMLTemplate = File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Microsoft\\Templates\\MC_NuevaMinuta.html");
-                }
-                newMail.HTMLBody = "";
-                newMail.HTMLBody = HTMLTemplate + ReadSignature(email);
+            }
+            catch(Exception ex)
+            {
 
             }
-            //newMail.Subject = "Template Minutas de Acciones";
+            
+        }*/
+       
 
-            //MessageBox.Show(newMail.HTMLBody);
+       /* void Inspectors_NewInspectorv(Outlook.Inspector Inspector)
+        {
+            Outlook.MailItem mailItem = Inspector.CurrentItem as Outlook.MailItem;
+            Outlook.AppointmentItem meetingItem = Inspector.CurrentItem as Outlook.AppointmentItem;
+            MessageBox.Show("si");
+            if (mailItem != null)
+            {
+                MessageBox.Show(mailItem.HTMLBody.Substring(mailItem.HTMLBody.Length - 700));
 
-        }
+            }
+
+            if (meetingItem != null)
+            {
+                
+            }
+        }*/
+
+        /*public void ReadMail(Office.IRibbonControl control)
+        {
+            try
+            {
+                
+                DialogResult dialogResult = MessageBox.Show("Va a eliminar el contenido no enviado, ¿desea continuar?", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    Outlook.Application app = Globals.ThisAddIn.Application;
+                    Outlook.MailItem newMail = (Outlook.MailItem)app.CreateItem(Outlook.OlItemType.olMailItem);
+                    Outlook.Inspector currentInspector = (Outlook.Inspector)newMail.GetInspector;
+                    Inspectors_NewInspectorv(currentInspector);
+                    Outlook.MailItem mailItem = Inspector.CurrentItem as Outlook.MailItem;
+                    //Outlook.Inspectors inspectors;
+                    //inspectors = this.Application.Inspectors;
+
+                    //Outlook.Application app = Globals.ThisAddIn.Application;
+                    //inspectors = app.Inspectors;
+                    //Inspectors_NewInspector(inspectors);
+                    //inspectors.NewInspector += new Outlook.InspectorsEvents_NewInspectorEventHandler(Inspectors_NewInspectorv);
+
+                    /*Outlook.MailItem newMail = app.CreateItem(Outlook.OlItemType.olMailItem);
+                    
+                    Outlook.Inspector Inspector = newMail.GetInspector;
+                    
+
+                    //Outlook.MailItem newMail = app.CreateItem(Outlook.OlItemType.olMailItem);
+
+                    
+
+                    //Outlook.Inspector inspector = currentInspector;
+                    //Outlook.Inspector inspector = app.ActiveInspector.currentInspector;
+
+                    if (Inspector.IsWordMail())
+                    {
+                        //MessageBox.Show("si");
+                        newMail.BodyFormat = Outlook.OlBodyFormat.olFormatHTML;
+                        string cuerpo = newMail.HTMLBody;
+                        Word.Document wordDocument = Inspector.WordEditor;
+                        Word.Selection selected = wordDocument.Windows[1].Selection;
+                        MessageBox.Show(cuerpo.Substring(cuerpo.Length - 700));
+                        //Word.Range range = wordDocument.Range(wordDocument.Content.Start, wordDocument.Content.End);
+                        Word.Range range = wordDocument.Range(0, wordDocument.Characters.Count);
+                        //MessageBox.Show(wordDocument.Content.End.ToString());
+                        Word.Find findObject = range.Find;
+//                        MessageBox.Show(range.Find.);
+                        findObject.ClearFormatting();
+                        findObject.Text = cuerpo;
+                        
+                        findObject.Replacement.ClearFormatting();
+                        findObject.Replacement.Text = "new value";
+                        object replaceAll = Word.WdReplace.wdReplaceAll;
+
+                        findObject.Execute(ReplaceWith: replaceAll);
+                    }
+
+                }
+            }
+            catch(Exception ex)
+            {
+
+            }
+        }*/
 
         public void NuevaCita(Office.IRibbonControl control)
         {
             
             try
             {
-                Microsoft.Office.Interop.Outlook.Application app = Globals.ThisAddIn.Application;
-                Microsoft.Office.Interop.Outlook.AppointmentItem newCita = (Microsoft.Office.Interop.Outlook.AppointmentItem)
-                app.CreateItem(Microsoft.Office.Interop.Outlook.OlItemType.olAppointmentItem);
+                Outlook.Application app = Globals.ThisAddIn.Application;
+                Outlook.AppointmentItem newCita = (Outlook.AppointmentItem)app.CreateItem(Outlook.OlItemType.olAppointmentItem);
                 
 
                 if (newCita != null)
                 {
-                    estado_mail = false;
-                    estado_meeting = true;
                     RichTextBox rtb = new RichTextBox();
                     rtb.Rtf = System.Text.Encoding.UTF8.GetString(newCita.RTFBody);
                     rtb.Select(rtb.TextLength, 0);
@@ -188,12 +206,10 @@ namespace MeetingCopper
                     newCita.Start = DateTime.Now.AddHours(2);
                     newCita.End = DateTime.Now.AddHours(3);
                     newCita.Location = "Elija la ubicación de la Reunión";
-                    newCita.Subject = "Reunión Template";
-                    newCita.Recipients.Add("Seleccione los Destinatarios");
-                    newCita.Display(true);
-                    newCita.AllDayEvent = false;
-
+                    //newCita.Subject = "Reunión Template";
                     
+                    newCita.AllDayEvent = false;
+                    newCita.Display(false);
                 } 
                 
             }
@@ -207,14 +223,10 @@ namespace MeetingCopper
         {
             try
             {
-                Microsoft.Office.Interop.Outlook.Application app = Globals.ThisAddIn.Application;
-                Microsoft.Office.Interop.Outlook.AppointmentItem newCita = (Microsoft.Office.Interop.Outlook.AppointmentItem)
-                app.CreateItem(Microsoft.Office.Interop.Outlook.OlItemType.olAppointmentItem);
+                Outlook.Application app = Globals.ThisAddIn.Application;
+                Outlook.AppointmentItem newCita = (Outlook.AppointmentItem)app.CreateItem(Outlook.OlItemType.olAppointmentItem);
                 if (newCita != null)
                 {
-                    estado_mail = false;
-                    estado_meeting = true;
-
                     newCita.MeetingStatus = Microsoft.Office.Interop.Outlook.OlMeetingStatus.olMeeting;
 
                     RichTextBox rtb = new RichTextBox();
@@ -233,13 +245,9 @@ namespace MeetingCopper
                     newCita.Start = DateTime.Now.AddHours(2);
                     newCita.End = DateTime.Now.AddHours(3);
                     newCita.Location = "Elija la ubicación de la Reunión";
-                    newCita.Subject = "Reunión Template";
-                    newCita.Recipients.Add("Seleccione los Destinatarios");
-
-                    newCita.Display(true);
-                    newCita.AllDayEvent = false;
-
                     
+                    newCita.AllDayEvent = false;
+                    newCita.Display(false);
                 }
             }
             catch (Exception ex)
@@ -253,9 +261,8 @@ namespace MeetingCopper
             
             try
             {
-                Microsoft.Office.Interop.Outlook.Application app = Globals.ThisAddIn.Application;
-                Microsoft.Office.Interop.Outlook.MailItem newMail = (Microsoft.Office.Interop.Outlook.MailItem)
-                app.CreateItem(Microsoft.Office.Interop.Outlook.OlItemType.olMailItem);
+                Outlook.Application app = Globals.ThisAddIn.Application;
+                Outlook.MailItem newMail = (Microsoft.Office.Interop.Outlook.MailItem)app.CreateItem(Outlook.OlItemType.olMailItem);
                 Outlook.ExchangeUser currentUser = app.Session.CurrentUser.AddressEntry.GetExchangeUser();
                 string email = "@angloamerican";
                 if (currentUser != null)
@@ -265,9 +272,6 @@ namespace MeetingCopper
 
                 if (newMail != null)
                 {
-                    estado_mail = true;
-                    estado_meeting = false;
-                    
                     string HTMLTemplate;
                     try
                     {
@@ -278,13 +282,12 @@ namespace MeetingCopper
                         HTMLTemplate = File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Microsoft\\Templates\\MC_NuevaMinuta.html");
                     }
 
-                    newMail.Subject = "Template Minutas de Acciones";
+                    newMail.Subject = "Minuta Reunión";
                     newMail.HTMLBody = HTMLTemplate + ReadSignature(email);
                     
-                    newMail.To = "Seleccione sus Destinatarios";
-                    Microsoft.Office.Interop.Outlook.Recipients sentTo = newMail.Recipients;
-                    sentTo.ResolveAll();
-                    newMail.Display(true);
+                   
+                    
+                    newMail.Display(false);
                     
                 }
             }
@@ -334,6 +337,7 @@ namespace MeetingCopper
         {
             //MessageBox.Show(ribbonID);
             //return GetResourceText("MeetingCopper.Ribbon.xml");
+            
             switch (ribbonID)
             {
                 case "Microsoft.Outlook.Appointment":
