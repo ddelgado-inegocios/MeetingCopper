@@ -207,7 +207,7 @@ namespace MeetingCopper
                     newCita.End = DateTime.Now.AddHours(3);
                     newCita.Location = "Elija la ubicación de la Reunión";
                     //newCita.Subject = "Reunión Template";
-                    newCita.Recipients.Add("Seleccione los Destinatarios");
+                    
                     newCita.AllDayEvent = false;
                     newCita.Display(false);
                 } 
@@ -245,7 +245,7 @@ namespace MeetingCopper
                     newCita.Start = DateTime.Now.AddHours(2);
                     newCita.End = DateTime.Now.AddHours(3);
                     newCita.Location = "Elija la ubicación de la Reunión";
-                    newCita.Recipients.Add("Seleccione los Destinatarios");
+                    
                     newCita.AllDayEvent = false;
                     newCita.Display(false);
                 }
@@ -285,7 +285,7 @@ namespace MeetingCopper
                     newMail.Subject = "Minuta Reunión";
                     newMail.HTMLBody = HTMLTemplate + ReadSignature(email);
                     
-                    newMail.To = "Seleccione sus Destinatarios";
+                   
                     
                     newMail.Display(false);
                     
