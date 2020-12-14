@@ -7,7 +7,7 @@
 					<button id="textButtonMinuta" label="Nueva Minuta"
 					 screentip="Uso General" onAction="NuevaMinuta"
 					 supertip="Generar una Nueva Minuta"
-					 getImage="MinutaIcon" size="large"
+					 getImage="MinutaIcon" size="large" 
 					  />
 				</group>
 			</tab>

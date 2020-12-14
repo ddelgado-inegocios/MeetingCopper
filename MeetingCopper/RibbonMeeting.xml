@@ -11,7 +11,7 @@
 					 />
 				</group>
 				<group id="ContentGroupRutina"  >
-					<button id="textButtonRutina" label="Task Assignment"
+					<button id="textButtonRutina" label="Task Assignment" 
 					 screentip="Uso General" onAction="NuevaRutina"
 					 supertip="Generar una Nueva Rutina"
 					 getImage="RutinaIcon" size="large"
