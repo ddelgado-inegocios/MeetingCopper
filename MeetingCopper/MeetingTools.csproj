@@ -198,6 +198,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="MeetingTools_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -210,6 +211,7 @@
       <XmlRibbon>true</XmlRibbon>
     </Compile>
     <Compile Include="Settings.cs" />
+    <Compile Include="TemplateEnum.cs" />
     <Compile Include="ThisAddIn.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -225,22 +227,15 @@
     <EmbeddedResource Include="Ribbon.xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\173-user-1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\076-phonebook-1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\meeting00.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\acuerdo00.png" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="RibbonMeeting.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="RibbonMail.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\minuta.png" />
+    <Content Include="Resources\reunion.png" />
+    <Content Include="Resources\rutina.png" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -250,10 +245,11 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>MeetingCopper_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>
+    </ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>8A2CD74AB281C29A0DB11992AB5FCCF13605A6AF</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>5C281F96D2CA81FA7F8A945213D472D3A54FE9D7</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup />
   <!-- Include the build rules for a C# project. -->

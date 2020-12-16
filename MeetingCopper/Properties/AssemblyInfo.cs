@@ -6,12 +6,12 @@ using System.Security;
 // La información general de un ensamblado se controla mediante el siguiente 
 // conjunto de atributos. Cambie estos valores de atributo para modificar la información
 // asociada con un ensamblado.
-[assembly: AssemblyTitle("MeetingTools")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Meeting Tools")]
+[assembly: AssemblyDescription("Addin to Microsoft Outlook")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("MeetingTools")]
-[assembly: AssemblyCopyright("Copyright ©  2020")]
+[assembly: AssemblyCompany("Tiaxa")]
+[assembly: AssemblyProduct("Meeting Tools")]
+[assembly: AssemblyCopyright("Copyright Tiaxa ©2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

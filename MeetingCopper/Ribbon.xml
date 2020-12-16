@@ -5,7 +5,7 @@
 			<tab idMso="TabAddIns" label="Meeting Tools" insertAfterMso="TabHome"  >
 				<group id="ContentGroupMeeting" >
 					<button id="textButtonMeeting" label="Nueva Reunión"
-					 screentip="Uso General" onAction="NuevaCita"
+					 screentip="Uso General" onAction="NuevaReunion"
 					 supertip="Generar una Nueva Reunión"
 					 getImage="MeetingIcon" size="large"
 					  />
